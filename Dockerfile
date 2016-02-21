@@ -2,4 +2,4 @@
 FROM scratch
 MAINTAINER Philpz <philipzheng@gmail.com>
 
-ADD raspbian.2015.02.21.tar.xz /
+ADD raspbian.2016.02.21.tar.xz /
