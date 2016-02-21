@@ -3,7 +3,7 @@ set -e
 
 dir="wheezy-chroot"
 rootfsDir="wheezy-chroot"
-tarFile="raspbian.2014.09.09.tar.xz"
+tarFile="raspbian.2015.02.21.tar.xz"
 ( set -x; mkdir -p "$rootfsDir" )
 
 (
@@ -96,7 +96,11 @@ fi
 	
 	# make sure we're fully up-to-date
 	chroot "$rootfsDir" /bin/bash -c 'apt-get update && apt-get dist-upgrade -y'
-	
+
+        # jenkins mod to run dpkg
+        echo "crontab:x:107:" >> $rootfsDir/etc/group
+        echo "messagebus:x:117:" >> $rootfsDir/etc/group
+
 	# delete all the apt list files since they're big and get stale quickly
 	rm -rf "$rootfsDir/var/lib/apt/lists"/*
 	# this forces "apt-get update" in dependent images, which is also good
